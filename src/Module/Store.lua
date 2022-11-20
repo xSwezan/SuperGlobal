@@ -4,9 +4,22 @@ local MessagingService = game:GetService("MessagingService")
 
 local Types = require(script.Parent.Types)
 
+--[=[
+	@class Store
+
+	A Store contains data (items) and is shared across all servers in the game.
+	A Store allow you to manipulate items that can be accessed throughout all of the servers in the game.
+]=]
 local Store = {}
 Store.__index = Store
 
+--[=[
+	@private
+	Create a new StoreClass
+
+	@param Name string
+	@return StoreType
+]=]
 function Store.new(Name: string): Types.Store
 	local self = setmetatable({}, Store)
 
@@ -43,26 +56,40 @@ function Store:FireServers(Name: string, Data: any)
 	MessagingService:PublishAsync(self.Key, Encoded)
 end
 
-function Store:AddItem(Key: string, Data: Types.ItemData, Expiration: number?)
+--[=[
+	Add an Item into the Store
+]=]
+function Store:AddItem(Key: string, Data: Types.ItemData, Expiration: number?): nil
 	local DataMap: MemoryStoreSortedMap = self.DataMap
 	DataMap:SetAsync(Key, Data, Expiration or 604800) -- 1 Week
 
 	self:FireServers("ItemAdded", Key)
 end
 
-function Store:RemoveItem(Key: string)
+--[=[
+	Remove an Item from the Store
+]=]
+function Store:RemoveItem(Key: string): nil
 	local DataMap: MemoryStoreSortedMap = self.DataMap
 	DataMap:RemoveAsync(Key)
 
 	self:FireServers("ItemRemoved", Key)
 end
 
+--[=[
+	Get an Item from the Store
+]=]
 function Store:GetItem(Key: string): any?
 	local DataMap: MemoryStoreSortedMap = self.DataMap
 
 	return DataMap:GetAsync(Key)
 end
 
+--[=[
+	Get an Amount of items from the Store
+
+	@return ItemData
+]=]
 function Store:GetItems(Count: number?, SortDirection: Enum.SortDirection?): {[string]: Types.ItemData}
 	local DataMap: MemoryStoreSortedMap = self.DataMap
 

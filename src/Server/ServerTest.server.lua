@@ -23,6 +23,7 @@ Market.ItemAdded:Connect(function(Key: string)
 
 	CreateListing(Key, Data)
 end)
+
 Market.ItemRemoved:Connect(function(Key: string)
 	
 end)
@@ -53,11 +54,3 @@ ReplicatedStorage:WaitForChild("RemoveListing").OnServerEvent:Connect(function(P
 	local ItemKey = ("%s-%s"):format(Player.UserId, Name or "")
 	Market:RemoveItem(ItemKey)
 end)
-
--- Market:AddItem(ItemKey,{
--- 	Name = "xSwezan";
--- 	Item = "Apple";
--- 	Cost = math.random(1,100000);
--- })
--- task.wait(5)
--- Market:RemoveItem(ItemKey)

@@ -1,13 +1,24 @@
-gitRepoUrl = "https://github.com/xSwezan/MODULE_NAME"
+gitRepoUrl = "https://github.com/xSwezan/SuperGlobal"
 gitSourceBranch = "main"
 
-classorder = [
-
+classOrder = [
+	"SuperGlobal",
+	"Store",
 ]
 
 [home]
 enabled = true
-includeReadme = false
+includeReadme = true
+
 
 [docusaurus]
-tagline = "PLACEHOLDER"
+tagline = "Simplified Global Server Communication"
+
+[[navbar.items]]
+href = "https://www.roblox.com/library/11615909686"
+label = "Model"
+position = "right"
+
+[[home.features]]
+title = "Easy To Use"
+description = "This Library is Easy To Use with straight a forward API"
