@@ -1,5 +1,5 @@
 {
-	"name": "MODULE_NAME",
+	"name": "SuperGlobal",
 	"tree": {
 		"$className": "DataModel",
 		"ServerScriptService": {
